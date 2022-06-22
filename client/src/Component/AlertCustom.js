@@ -9,7 +9,6 @@ export default function AlertCustom({prop , infoObj }) {
         prop();
     }
 
-
     if (show) {
         return (
           <>
@@ -22,13 +21,13 @@ export default function AlertCustom({prop , infoObj }) {
                     </Alert.Heading>
                   </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body >
                   <p>
                     <strong> Created with address </strong>: {infoObj.CamapignAddress}
                     <hr />
                    <p> <strong> Raised by </strong> :{infoObj.CampaignCreater} </p> 
                    <p> <strong> title </strong> : {infoObj.Tittle} </p>
-                   <p> <strong> desc </strong> : <span className="d-inline-block text-truncate">
+                   <p> <strong> desc </strong> : <span className="d-inline-block text-truncate" style={{maxWidth:'250px'}}>
                       {infoObj.Desc}
                     </span>  </p>
                   </p>

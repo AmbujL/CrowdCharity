@@ -10,8 +10,17 @@ export default function CreateCampaign({ prop,show,resetShow }) {
   const [limit, setLimit] = useState(undefined);
 
   const updateProps = (e) => {
+
+    document.getElementById("createCampaignButton").disabled = true;
+    document.getElementById("showmsg").innerHTML="Awaiting confirmation...";
     e.preventDefault();
-    prop(title, desc, amount, limit, fname.concat(" ".concat(lname)));
+    prop(title, desc, amount, limit, fname.concat(" ".concat(lname))).then(
+      () => {
+        (document.getElementById("createCampaignButton").disabled = false);
+       document.getElementById("showmsg").innerHTML =
+         "Resolved";
+      }
+    );
   };
 
   return (
@@ -51,7 +60,7 @@ export default function CreateCampaign({ prop,show,resetShow }) {
               <FloatingLabel label="Enter Tittle">
                 <Form.Control
                   type="text"
-                  placeholder="for eg. Bhukmari hathao"
+                  placeholder=" "
                   onChange={(e) => setTittle(e.target.value)}
                 />
               </FloatingLabel>
@@ -67,31 +76,36 @@ export default function CreateCampaign({ prop,show,resetShow }) {
               </FloatingLabel>
 
               <FloatingLabel
-                label="Enter amount required for Campaign"
+                label="Enter amount required for Campaign (in ether)"
                 className="mb-3"
               >
                 <Form.Control
-                  type="text"
+                  type="number"
                   placeholder=" "
                   onChange={(e) => setAmount(e.target.value)}
+                  step="0.001"
+                  min="0.001"
                 />
               </FloatingLabel>
 
-              <FloatingLabel label="Enter expiry date for the campaign">
+              <FloatingLabel label="Enter validity for the campaign (in days)">
                 <Form.Control
-                  type="text"
+                  type="number"
                   placeholder=" "
                   onChange={(e) => setLimit(e.target.value)}
+                  min="1"
                 />
               </FloatingLabel>
             </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
-            <Button variant="info" type="submit">
+            <Button
+              variant="info"
+              type="submit"
+              className="mt-3"
+              id="createCampaignButton"
+            >
               Submit
             </Button>
+            <div className="small text-muted mt-2" id="showmsg"></div>
           </Form>
         </Modal.Body>
         <Modal.Footer>

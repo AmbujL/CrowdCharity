@@ -11,7 +11,6 @@ import MainBody from "./Component/MainBody.js";
 import AlertCustom from "./Component/AlertCustom";
 import Footer from "./Component/Footer";
 import Header from "./Component/Header";
-
 import nblue from "./images/night-blue.png";
 import gwhite from "./images/mainBody_background.jpg";
 import logo1 from "./images/patient1.webp";
@@ -19,11 +18,13 @@ import logo2 from "./images/patient2.jpg";
 import logo3 from "./images/patient3.jpg";
 import logo4 from "./images/patient4.jpg";
 import logo5 from "./images/cancer_5.jpg";
+import logo6 from "./images/ukraine.jpg";
+import loginmsg from "./images/loginmsg.png";
 
 export const GlobalState = createContext();
 
 export default function App() {
-  const array = [logo1, logo2, logo3, logo4, logo5];
+  const array = [logo1, logo2, logo3, logo4, logo5, logo6];
   const [show, setShow] = useState(false);
   const [campaign, setCampaign] = useState({});
   const [flag, setFlag] = useState(false);
@@ -32,12 +33,17 @@ export default function App() {
   const [Instance, setInstance] = useState(undefined);
   const [CampaignInfo, setCampaignInfo] = useState([]);
   const [randomSet, setRandomSet] = useState([]);
+  const [auth, setAuth] = useState(
+    JSON.parse(window.sessionStorage.getItem("flag"))
+  );
 
   useEffect(() => {
     const init = async () => {
       if (window.ethereum) {
         window.ethereum.on("chainChanged", () => {
+            window.sessionStorage.setItem("flag", false);
           window.location.reload();
+
         });
         window.ethereum.on("accountsChanged", async () => {
           window.location.reload();
@@ -49,7 +55,7 @@ export default function App() {
         const web3 = await getWeb3();
         const accounts = await web3.eth.getAccounts();
         const netId = await web3.eth.net.getId();
-        const address = FundingContainerContract.networks[netId].address;
+        const address = FundingContainerContract.networks[netId].address
         const instance = new web3.eth.Contract(
           FundingContainerContract.abi,
           address
@@ -57,6 +63,8 @@ export default function App() {
         setWeb3(web3);
         setAccounts(accounts);
         setInstance(instance);
+        window.sessionStorage.setItem("flag", true);
+        setAuth(JSON.parse(window.sessionStorage.getItem("flag")));
       } catch (error) {
         console.log(error);
         return (
@@ -70,11 +78,12 @@ export default function App() {
     init();
   }, [Instance, accounts]);
 
+
   const createCampaign = async (title, desc, amount_required, limit, name) => {
     try {
-      setTimeout(() => console.log("create campaign", Instance), 2000);
-      await Instance.methods
-        .createCampaign(title, desc, parseInt(amount_required), limit, name)
+
+     const status= await Instance.methods
+        .createCampaign(title, desc, web3.utils.toWei(amount_required), limit, name)
         .send({ from: accounts[0] })
         .then((res) => {
           const eventInfo = res.events.Projectcreated.returnValues;
@@ -85,7 +94,10 @@ export default function App() {
             Desc: eventInfo.desc,
           });
           setFlag(true);
+          if (res) return true;
+          
         });
+      return status;
     } catch (error) {
       console.error(error);
     }
@@ -136,42 +148,64 @@ export default function App() {
   };
 
   const fundCampaign = async (instance, eth) => {
-    instance.methods
-      .donate()
-      .send({
-        from: accounts[0],
-        value: parseInt(web3.utils.toWei(eth, "ether")),
-      })
-      .then((result) => {
-        const eventInfo = result.events.contributionMade.returnValues;
-        console.log(eventInfo);
+    try {
+      const status= await instance.methods
+        .donate()
+        .send({
+          from: accounts[0],
+          value: parseInt(web3.utils.toWei(eth, "ether")),
+        })
+        .then((result) => {
+          const eventInfo = result.events.contributionMade.returnValues;
+          console.log(eventInfo);
 
-        const creator_obj = result.events.creatorPaid;
-        const refund_obj = result.events.refundPaid;
-        if (typeof creator_obj == "object") {
-          return <alert> Creator Paid Successfully</alert>;
-        }
-
-        //  else if (typeof paid_obj == "object") {
-        //   return (
-        //     <Alert variant="success" onClose={() => setShow(false)} dismissible>
-        //       <Alert.Heading>
-        //         Oops! campaign expired , Refund to all donator been Made as per
-        //         All or Nothing Policy
-        //       </Alert.Heading>
-        //       <p>{}</p>
-        //     </Alert>
-        //   );
-        // }
-      });
+        
+            
+          const creator_obj = result.events.creatorPaid;
+          if (typeof creator_obj == "object") {
+            alert("Creator Paid Successfully");
+          }
+            if (result) return true;
+         
+        });
+      return status;
+    }
+    catch (e)
+    {
+      console.log("encountered error", e);
+    }
   };
 
   const changeState = () => {
     setFlag(!flag);
   };
 
-  if (web3 === undefined || accounts === undefined || Instance === undefined) {
-    return <h1 className="console.warn(first)"> Loading..</h1>;
+  
+
+  if (web3 == undefined || accounts === undefined || Instance === undefined) {
+    
+    if (
+      auth == null || auth ==false
+    ) {
+      return (
+        <>
+          <div className="text-center mt-5">
+            <img src={loginmsg} alt="loginmsg" style={{ width: "300px", height: "300px" }} />
+            <p className="text-muted mt-3 display-5">
+              Please Connect metamask to Ropsten Network ..
+            </p>
+          </div>
+        </>
+      );
+    }
+
+  
+      return (
+        <h1 className="display-6 text-center text-muted mt-5">
+          Loading..
+        </h1>
+      );
+    
   }
 
   return (

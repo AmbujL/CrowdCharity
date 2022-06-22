@@ -1,6 +1,5 @@
 import React from "react";
-import { Accordion, Container, Button, Carousel } from "react-bootstrap";
-import CustomCard from "../Component/Card";
+import { Accordion, Container, Button } from "react-bootstrap";
 import "../App.css";
 import Corosoul from "./Corosoul";
 import CardCarousel from "./CardCarousel";
@@ -37,13 +36,12 @@ export default function MainBody({ donate, show, setShow }) {
 
           <div className="row mt-5 ">
             <div className="col-lg-6 ">
-              <img src={light} className="img-fluid " />
+              <img src={light} alt="light" className="img-fluid " />
             </div>
 
             <div className="col-lg-6 text-start">
               <div className="row ">
                 <div className="col-lg-2 mt-3">
-                  {" "}
                   <i className="fa-solid fa-chalkboard-user color-format fa-2x"></i>
                 </div>
                 <div
@@ -107,7 +105,7 @@ export default function MainBody({ donate, show, setShow }) {
                   }}
                 >
                   <div className="card-body">
-                    <h4 className="card-title mb-3">Campaign Resultion</h4>
+                    <h4 className="card-title mb-3">Campaign Resolution</h4>
                     <p className="card-text">
                       On SuccessFully completing funding of the campaign . the
                       campaign creator is credited with all campaign ethereum
@@ -147,7 +145,7 @@ export default function MainBody({ donate, show, setShow }) {
               </div>
             </div>
             <div className="bg-light flex-fill img-fluid">
-              <img src={img1} />
+              <img src={img1} alt="img1" />
             </div>
           </div>
         </div>
@@ -165,41 +163,38 @@ export default function MainBody({ donate, show, setShow }) {
                 How do we enforce crowdfunding using Ethereum Blockchain
               </Accordion.Header>
               <Accordion.Body className="bg-dark text-light">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                when a user create a campaign in CrowdCharity a smart contract
+                with the mentioned details is created inside Ethereum , where other
+                user's get to donate using native crypto coin ethereum against
+                specific campaign smart contract . upon completion of the campaign
+                the creator of campaign is rewarded with all the ethereum coin
+                as they are sent to his/her account.
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="1">
               <Accordion.Header>What does all or None means?</Accordion.Header>
               <Accordion.Body className="bg-dark text-light">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                All or None architecture emphasis on the requirement of
+                collecting all the required funds under a validity for a
+                campaign before sending it to creator's account .On failing so,
+                the funds get returned back to their respective donor.
               </Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="2">
               <Accordion.Header className="row-sm">
-                How CrowdCharity{" "}
-                <i className="fa fa-cubes" aria-hidden="true"></i> &nbsp; Makes
-                sure that campaign owner is paid ?
+                How CrowdCharity &nbsp;
+                <i className="fa fa-cubes" aria-hidden="true"></i> &nbsp; makes
+                sure that Campaign Creator is paid ?
               </Accordion.Header>
               <Accordion.Body className="bg-dark text-light">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Payout to creator is initiated on last donation when campaign
+                has collected required fund under it's validity or if the
+                validity has been passed then Refund to donors is initiated
+                where all the funds is sent back to their donor's account.
+                <p className="mt-3 text-muted small">
+                  Campaign creator is only paid when the campaign
+                  successfully collect required fund under it's validity.
+                </p>
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>

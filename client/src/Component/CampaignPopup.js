@@ -33,8 +33,14 @@ export default function CampaignInfo({
 
   }, [expiry]);
 
-  const submit = (e) => {
-    donate(instance, eth);
+  const submit = async (e) => {
+    document.getElementById("donateButton").disabled = true;
+       document.getElementById("showmsgdonate").innerHTML =
+         "Awaiting Confirmation...";
+    await donate(instance, eth).then(() => {
+      document.getElementById("donateButton").disabled = false;
+      document.getElementById("showmsgdonate").innerHTML = "Resolved";
+    });
   };
 
   return (
@@ -50,16 +56,15 @@ export default function CampaignInfo({
             <Modal.Title className="fs-5">{tittle}</Modal.Title>
           </div>
         </Modal.Header>
-        <Modal.Body style={{ height: "600px", backgroundImage:"url("+modalbg+")"}} >
+        <Modal.Body
+          style={{ height: "600px", backgroundImage: "url(" + modalbg + ")" }}
+        >
           <div className="row mx-2  g-2 h-100 ">
-            <div
-              className="col-md-8 h-100  overflow-auto shadow  rounded-2 bg-light"
-            >
+            <div className="col-md-8 h-100  overflow-auto shadow  rounded-2 bg-light">
               <div className=" m-2 " style={{ height: "300px" }}>
                 <img
                   className=" h-100 d-block mx-auto"
                   src={img}
-                  // src="https://cimages.milaap.org/milaap/image/upload/c_fill,g_faces,h_198,w_264/v1649049751/production/images/campaign/480871/IMG-20170916-WA0097_d5a9cr_1649049756.jpg"
                   alt={Math.floor(Math.random())}
                 ></img>
               </div>
@@ -137,14 +142,18 @@ export default function CampaignInfo({
 
               <div className="d-block text-center mb-3">
                 <table className="w-100">
-                  <tr className="fs-4 text-danger">
-                    <th>DAY'S LEFT</th>
-                    <th>FUNDER'S</th>
-                  </tr>
-                  <tr className="fw-bolder fs-3">
-                    <td>{expiry}</td>
-                    <td>{funders}</td>
-                  </tr>
+                  <thead>
+                    <tr className="fs-4 text-danger">
+                      <th>DAY'S LEFT</th>
+                      <th>FUNDER'S</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="fw-bolder fs-3">
+                      <td>{expiry}</td>
+                      <td>{funders}</td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
 
@@ -162,17 +171,28 @@ export default function CampaignInfo({
                 >
                   <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Control
-                      type="text"
+                      type="number"
                       placeholder="Enter amount in eth"
                       onChange={(e) => setEth(e.target.value)}
+                      step="0.001"
+                      min="0.001"
                     />
                   </Form.Group>
                   <div>
-                    <Button variant="info" type="submit" className="w-100 ">
+                    <Button
+                      variant="info"
+                      id="donateButton"
+                      type="submit"
+                      className="w-100 "
+                    >
                       <span className="fs-5">
                         <i className="fas fa-heart  "></i> CONTRIBUTE{" "}
                       </span>
                     </Button>
+                    <div
+                      className="small text-muted mt-2"
+                      id="showmsgdonate"
+                    ></div>
                   </div>
                 </Form>
               </div>

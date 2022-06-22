@@ -72,8 +72,8 @@ export default function CustomCard({
 
       setRand(tempRand);
     setRandomSet((randomSet) => [...randomSet, tempRand]);
-   
-  },[1])
+    
+  },[])
   
   
   

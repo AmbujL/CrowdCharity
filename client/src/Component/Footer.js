@@ -26,10 +26,14 @@ export default function () {
 
             <div className="col-md-4 ">
               <div className="text-center mb-3">
-                <a href="#home" className=" fs-5 " style={{textDecoration:"none", color: "white"}}>
+                <a
+                  href="#home"
+                  className=" fs-5 "
+                  style={{ textDecoration: "none", color: "white" }}
+                >
                   CrowdCharity
                   <i className="fa fa-cubes" aria-hidden="true"></i>
-                </a >
+                </a>
               </div>
               <ul className=" list-unstyled fa-lg d-flex justify-content-center">
                 <li className="ms-3">
@@ -60,23 +64,24 @@ export default function () {
                 </a>
               </li>
               <li className="nav-item">
-                <a href="#" className="nav-link text-white px-2 ">
+                <a href="#BroseCampaign" className="nav-link text-white px-2 ">
                   Browse Campaign
                 </a>
               </li>
               <li className="nav-item">
-                <a href="#" className="nav-link text-white px-2 ">
+                <a href="#WorkingPage" className="nav-link text-white px-2 ">
                   How it Works?
                 </a>
               </li>
+
               <li className="nav-item">
-                <a href="#" className="nav-link text-white px-2 ">
-                  FAQs
+                <a href="#stories" className="nav-link text-white px-2 ">
+                  Stories
                 </a>
               </li>
               <li className="nav-item">
-                <a href="#" className="nav-link text-white px-2 ">
-                  Stories
+                <a href="#info" className="nav-link text-white px-2 ">
+                  FAQs
                 </a>
               </li>
             </ul>

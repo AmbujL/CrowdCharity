@@ -1,19 +1,14 @@
-import React ,{useContext} from "react";
-import { Button } from 'react-bootstrap';
+import React, { useContext } from "react";
 import "font-awesome/css/font-awesome.min.css";
 import "../App.css";
-import {GlobalState} from "../App.js"
-import img1 from "../images/Currency_Two Color.png"
-import img2 from "../images/istockphoto-1088865126-612x612.jpg";
+import { GlobalState } from "../App.js";
 import img3 from "../images/0041.webp";
-import img4 from "../images/0013new.webp";
 import gwhite from "../images/mainBody_background.jpg";
 import cubes from "../images/Ethereum_Monochromatic (1).png";
 
-
 export const LandingPage = () => {
   const { show, setShow } = useContext(GlobalState);
-  
+
   return (
     <>
       <div
@@ -26,14 +21,14 @@ export const LandingPage = () => {
           <h2 className=" display-3 fw-bolder">Free CrowdFunding for India</h2>
           <div className="lead fs-4  ms-2">
             <p>
-              A complete Decentralised solution for doing charity or raising
+              A Complete Decentralized solution of doing charity or raising
               funds for projects.
             </p>
 
             <ul className="p-4 mx-4 my-1">
               <strong>
                 <li>100% insured way of transfering funds</li>
-                <li>Complete Decenteralised Structure</li>
+                <li>Complete Decentralized Structure</li>
                 <li>Powered by Ethereum Blockchain</li>
                 <li>All or Nothing architecture</li>
               </strong>
@@ -46,31 +41,26 @@ export const LandingPage = () => {
               href="#"
               style={{ textDecoration: "none" }}
               className="text-info"
-              onClick={()=>setShow(!show)}
+              onClick={() => setShow(!show)}
             >
               Get Started
             </a>
           </div>
         </div>
 
-        <div
-          className="col-md-4 "
-        >
+        <div className="col-md-4 ">
           <img
             src={cubes}
+            alt="cubes"
             className="img-fluid w-100 h-100 d-md-block d-none "
           ></img>
         </div>
       </div>
     </>
   );
-
-}
-
-
+};
 
 export function Below() {
-  
   return (
     <>
       <div
@@ -144,26 +134,12 @@ export function Below() {
           <div
             className="container-fluid  "
             style={{ height: "600px" }}
-            // style={{
-            //   height: "500px",
-            //   backgroundImage:
-            //     "url(https://wallpaperaccess.com/full/1567666.png)",
-            // }}
           >
             <div className=" row justify-content-center align-items-center mx-1 text-white  bg-dark h-100 ">
               <div
                 className=" col-md-5 col bg-dark h-100 p-0"
-                style={
-                  {
-                    // backgroundImage:
-                    //   "url(https://static.wixstatic.com/media/d0fb19_485abdbf358041618423ee213c842bb8~mv2.gif)",
-                    // backgroundRepeat: "no-repeat",
-                    // backgroundSize: "",
-                    // backgroundPosition: "center",
-                  }
-                }
               >
-                <img src={img3} className="img-fluid h-100 w-100" />
+                <img src={img3} alt="img3" className="img-fluid h-100 w-100" />
               </div>
 
               <div className="col-md-7  text-start p-5">
@@ -176,9 +152,8 @@ export function Below() {
                     Ethereum
                     <i className="fab fa-ethereum fs-5"></i> Blockchain
                     technology , we empower Underprivileged with the funding and
-                    support that they need to overcome specific social,
-                    cultural, or economic hurdles individuals face in their
-                    daily lives.
+                    support they need to overcome  social, cultural, or
+                    economic hurdles individuals face in their daily lives.
                   </p>
                   <p className="mx-2 fs-3 lead ">
                     Time to embrace Decenteralisation !

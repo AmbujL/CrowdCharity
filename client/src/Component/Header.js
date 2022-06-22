@@ -21,17 +21,17 @@ const NavLinks = (props) => {
         <Nav.Link href="/" className={className2}>
           Home
         </Nav.Link>
-        <Nav.Link href="/#BroseCampaign" className={className2}>
+        <Nav.Link href="#BroseCampaign" className={className2}>
           Browse Campaign
         </Nav.Link>
-        <Nav.Link href="#WorkingPage" className={className2} >
+        <Nav.Link href="#WorkingPage" className={className2}>
           How it Works?
         </Nav.Link>
-        <Nav.Link href="/#stories" className={className2}>
+        <Nav.Link href="#stories" className={className2}>
           Stories
         </Nav.Link>
 
-        <Nav.Link href="/#info" className={className2}>
+        <Nav.Link href="#info" className={className2}>
           FAQs
         </Nav.Link>
       </Nav>
@@ -45,10 +45,8 @@ const CampaignSearchResult = ({ element, index }) => {
   const { array, randomSet } = useContext(GlobalState);
   const [objProgress, setObjProgress] = useState(element.currentRaisedFund);
 
-
   useEffect(() => {
-      if (element.campaignState == 1)
-    setObjProgress(element.goal);
+    if (element.campaignState == 1) setObjProgress(element.goal);
 
     setInitials("");
     element.name.split(" ").forEach((n) => {
@@ -121,7 +119,6 @@ export default function Header({ prop, show, setShow }) {
 
   const myNav = document.getElementById("mynav");
   window.onscroll = function () {
-    "use strict";
     if (
       document.body.scrollTop >= 50 ||
       document.documentElement.scrollTop >= 50
@@ -136,23 +133,23 @@ export default function Header({ prop, show, setShow }) {
 
   async function connect() {
     if (typeof window.ethereum != "undefined") {
-     const accounts = await window.ethereum
-       .request({
-         method: "wallet_requestPermissions",
-         params: [
-           {
-             eth_accounts: {},
-           },
-         ],
-       })
-       .then(() =>
-         window.ethereum.request({
-           method: "eth_requestAccounts",
-         })
-       );
+      const accounts = await window.ethereum
+        .request({
+          method: "wallet_requestPermissions",
+          params: [
+            {
+              eth_accounts: {},
+            },
+          ],
+        })
+        .then(() =>
+          window.ethereum.request({
+            method: "eth_requestAccounts",
+          })
+        );
     }
   }
- 
+
   return (
     <>
       <Navbar
@@ -214,7 +211,10 @@ export default function Header({ prop, show, setShow }) {
             </div>
           </Navbar.Collapse>
 
-          <Navbar.Brand href="#home" className="col-lg-4 text-white text-center ">
+          <Navbar.Brand
+            href="#home"
+            className="col-lg-4 text-white text-center "
+          >
             <span className="mt-0 fs-3">CrowdCharity </span>
             <i className="fa fa-cubes" aria-hidden="true"></i>
           </Navbar.Brand>
@@ -231,8 +231,14 @@ export default function Header({ prop, show, setShow }) {
             </div>
 
             <div className=" mt-0  d-inline-flex text-light align-items-center">
-              <button href="#login" style={{ maxWidth: "150px", border: "0px none", backgroundColor: "transparent" }}
-              onClick={()=>connect()}
+              <button
+                href="#login"
+                style={{
+                  maxWidth: "150px",
+                  border: "0px none",
+                  backgroundColor: "transparent",
+                }}
+                onClick={() => connect()}
               >
                 <i className="fa fa-user me-1 fa-lg text-primary"></i>
                 <Badge variant="warning" bg="warning" className="text-dark">
@@ -279,10 +285,7 @@ export default function Header({ prop, show, setShow }) {
             <div className="overflow-auto">
               {searchContent.map((element, index) => (
                 <div key={index} className="mb-2 ">
-                  <CampaignSearchResult
-                    element={element}
-                    index={index}
-                  />
+                  <CampaignSearchResult element={element} index={index} />
                 </div>
               ))}
             </div>{" "}

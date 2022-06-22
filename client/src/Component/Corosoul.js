@@ -1,14 +1,17 @@
-import React, {useState,} from 'react';
-import { Carousel, Container } from 'react-bootstrap';
+import React from 'react';
 import "font-awesome/css/font-awesome.min.css";
 import '../App.css'
 import Slider from "react-slick";
 import logo1 from "../images/patient1.webp";
+import logo2 from "../images/mother_son.webp";
+import logo3 from "../images/boy_patient.webp";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 
 
 
-const Reviews = () => {
+const Reviews = ({ item ,index}) => {
+  const logos = [ logo1, logo2, logo3 ]
+  
   return (
     <>
       <section className="align-self-center p-2" style={{ height: "400px" }}>
@@ -23,22 +26,18 @@ const Reviews = () => {
           <div className="col-sm-12 col-md-5  ">
             <img
               className=" w-100  "
-              src={logo1}
+              src={logos[index]}
               alt="First slide"
               style={{ objectFit: "cover" }}
             />
           </div>
 
           <div className="col-sm-12 col-md-7 ">
-            <h5 className="mb-3 "> You made it Happen!</h5>
+            <h4 className="mb-3 ">{item?.title}</h4>
             <p className="fs-6 w-75 ">
-              Hi' this is gregory , i have been suffering from tuberclosis past
-              10 years
-              <span className="bold text-info"> CrowdCharity</span> has helped
-              me in surviving this desease , each day i pray to god and thanks
-              him for being able to live another day.
+             {item?.text}
             </p>
-            <a className="text-info" href="#home">
+            <a className="text-info" href="#noShow">
               <i className="fa fa-arrow-right" aria-hidden="true"></i> Read More
             </a>
           </div>
@@ -49,6 +48,8 @@ const Reviews = () => {
 };
 
 const SamplePrevArrow = (props) => {
+
+
   const { className, onClick } = props;
   return (
     <div className={className} onClick={onClick}>
@@ -91,7 +92,8 @@ export default function () {
   //   }
   // ]
   
-  
+  const data = require("./fakeReviews.json");
+
 
   var settings = {
     fade: true,
@@ -142,12 +144,11 @@ export default function () {
       >
         <h3 className="text-center mb-3 fw-bolder ">Our Stories</h3>
         <Slider {...settings}>
-          <div className="ms-3 me-3">
-            <Reviews />
-          </div>
-          <div className="ms-3 me-3">
-            <Reviews />
-          </div>
+          {data.map((item, index) => (
+            <div key={index} className="ms-3 me-3">
+              <Reviews item={item} index={index} />
+            </div>
+          ))}
 
           {/* <section>
             <div className="row">

@@ -2,7 +2,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import CustomCard from "../Component/Card";
-import React,{ useState,useEffect,useContext } from "react";
+import React,{ useState,useContext } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import {GlobalState } from "../App.js"
 
@@ -56,8 +56,8 @@ export default function Carousel({donate}) {
             <CustomCard
               tittle={element.title}
               desc={element.desc}
-              goal={parseInt(element.goal)}
-              currentRaisedFund={parseInt(element.currentRaisedFund)}
+              goal={Math.round(element.goal *100)/100}
+              currentRaisedFund={Math.round(element.currentRaisedFund*100)/100}
               expiry={parseInt(element.expiry)}
               campaignState={parseInt(element.campaignState)}
               owner={element.owner}

@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "@openzeppelin/contracts": "^4.5.0",
+    "@truffle/hdwallet-provider": "^2.0.9",
+    "dotenv": "^16.0.1",
     "react-router-dom": "^6.3.0",
     "react-slick": "^0.29.0"
   }

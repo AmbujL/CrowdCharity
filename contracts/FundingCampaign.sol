@@ -22,7 +22,7 @@ contract FundingCampaign{
 
         tittle=_tittle;
         desc=_desc;
-        goal=_fundRequired.mul(1 ether);
+        goal=_fundRequired;
         timeconstraint=_limit;
         campaignState = state.started;
         owner = Admin;
@@ -83,7 +83,7 @@ contract FundingCampaign{
     }
 
     function donate() payable public checkAdmin checkstate returns (bool){
-        require(msg.value>= 0.1 ether);
+        require(msg.value>= 0.001 ether);
 
         bool value= isItstopped();
 
